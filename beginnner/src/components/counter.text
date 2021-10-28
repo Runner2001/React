@@ -1,0 +1,105 @@
+import React, { Component } from "react";
+
+class Counter extends Component {
+  // this will need to do event handler to bind with class
+  // constructor(){
+  //   super()
+  //   this.increment = this.increment.bind(this)
+  // }
+
+  // increment(){
+  //   console.log("click increment" ,this)
+  // }
+
+  //To solve above function use Arrow Function
+  increment = () => {
+    //this.state.count++ will show error need to do setState
+    this.setState({ count: this.state.count + 1 });
+  };
+
+  state = {
+    count: this.props.count, //all react component has props to pass data between components
+  };
+
+  render() {
+    console.log("Props", this.props); //values from the parent components data
+    return (
+      <div className="container mt-4">
+        <div>
+          {this.props.children}
+          <button
+            onClick={() => this.props.delete(this.props.id)}
+            className="btn btn-danger text-white btn-sm m-2"
+          >
+            Delete
+          </button>
+
+          <button
+            onClick={this.increment}
+            className="btn btn-sm btn-secondary text-white"
+          >
+            Increment
+          </button>
+          <span className={this.badgeClass()}> {this.counter()} </span>
+        </div>
+      </div>
+    );
+  }
+
+  badgeClass() {
+    let classes = "badge badge-sm m-2 bg-";
+    classes += this.state.count === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  counter() {
+    const { count } = this.state;
+    return count === 0 ? "Zero" : count;
+  }
+}
+
+export default Counter;
+
+
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, countvalue: 0 },
+      { id: 2, countvalue: 0 },
+      { id: 3, countvalue: 0 },
+      { id: 4, countvalue: 0 },
+    ],
+  };
+
+  handleDelete = (id) => {
+   const counter = this.state.counters.filter( selected => selected.id !== id)
+   this.setState({counters : counter}) 
+   // In react state data can't change
+   //setState watch the chage
+   //that while we use setState to create new and asign to it
+  };
+
+  render() {
+    return (
+      <div className="container mt-5">
+        {this.state.counters.map((count) => (
+          <Counter 
+            key={count.id} 
+            count={count.countvalue}
+            id={count.id}
+            counter={count} //All objects
+            delete={this.handleDelete}
+          >
+            {/* Pass Data to child */}
+            <h4>Counter {count.id} </h4>
+          </Counter>
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Counters;
