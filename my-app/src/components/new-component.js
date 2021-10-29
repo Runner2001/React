@@ -1,86 +1,44 @@
 import React, { Component } from "react";
-import { Media } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
 class Menu extends Component{
 
     constructor(props){
         super(props);
 
-        this.data = {
-            dishes: [
-                {
-                    id : 0,
-                    name : 'First',
-                    image : 'assets/buffet.png',
-                    label : 'Hot',
-                    category : 'mains',
-                    price : '4.88',
-                    description : 'Hello I am From the First List of the React App Am trying to understand React.'
-                },
-                {
-                    id : 1,
-                    name : 'First',
-                    image : 'assets/buffet.png',
-                    label : 'Hot',
-                    category : 'mains',
-                    price : '4.88',
-                    description : 'Hello I am From the First List of the React App Am trying to understand React.'
-                },
-                {
-                    id : 2,
-                    name : 'First',
-                    image : 'assets/buffet.png',
-                    label : 'Hot',
-                    category : 'mains',
-                    price : '4.88',
-                    description : 'Hello I am From the First List of the React App Am trying to understand React.'
-                },
-                {
-                    id : 3,
-                    name : 'First',
-                    image : 'assets/buffet.png',
-                    label : 'Hot',
-                    category : 'mains',
-                    price : '4.88',
-                    description : 'Hello I am From the First List of the React App Am trying to understand React.'
-                },
-                {
-                    id : 4,
-                    name : 'First',
-                    image : 'assets/buffet.png',
-                    label : 'Hot',
-                    category : 'mains',
-                    price : '4.88',
-                    description : 'Hello I am From the First List of the React App Am trying to understand React.'
-                }
-            ]
+        this.state = {
+            selectDish: null
         }
     }
 
+    onSelectdishes(dish){
+        this.setState({selectDish: dish})
+    }
+    renderDish(dish){
+       return (dish!=null)?<CardText>{dish.description}</CardText> : <div>Nothing</div>
+    }
+
     render(){
-        const menu = this.data.dishes.map((dish) => {
+        const menu = this.props.dishes.map((dish) => {
             return (
-                <div key={dish.id} className='col-12 mt-5'>
-                    <Media tag='li'>
-                        <Media left middle>
-                            <Media object src={dish.image} />
-                        </Media>
-                        <Media body className='ml-5'>
-                            <Media heading>
+                <div key={dish.id} className='col-xs-12 col-sm-6 col-md-4 col-lg-2 mt-5'>
+                    <Card 
+                        onClick={() => this.onSelectdishes(dish)}
+                    >
+                            <CardImg width="50%" src={dish.image} />
+                            <CardTitle>
                                 {dish.name}
-                            </Media>
-                            <p>{dish.description}</p>
-                        </Media>
-                    </Media>
+                            </CardTitle>
+                            
+                    </Card>
                 </div>
             );
         });
         return (
             <div className='container'>
                 <div className='row'>
-                    <Media list>
                         {menu}
-                    </Media>
+                        {this.renderDish(this.state.selectDish)}
                 </div>
             </div>
         );
