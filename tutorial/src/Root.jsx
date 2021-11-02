@@ -1,6 +1,9 @@
 import React from "react";
 import Nav from "./nav";
 import Shopping from "./Shopping";
+import Home from "./Home";
+import Login from "./Login";
+import { Route, Switch } from "react-router-dom";
 
 class Root extends React.Component {
   constructor(props) {
@@ -117,12 +120,21 @@ class Root extends React.Component {
     return (
       <React.Fragment>
         <Nav cart={this.state.cart} />
-        <Shopping
-          allproducts={this.state.allproducts}
-          cart={this.state.cart}
-          addCart={this.addCart}
-          increase={this.increase}
-          decrease={this.decrease}
+
+        <Route path="/" exact component={Login} />
+        <Route path="/home" component={Home} />
+        <Route
+          path="/shopping"
+          exact
+          component={() => (
+            <Shopping
+              allproducts={this.state.allproducts}
+              cart={this.state.cart}
+              addCart={this.addCart}
+              increase={this.increase}
+              decrease={this.decrease}
+            />
+          )}
         />
       </React.Fragment>
     );

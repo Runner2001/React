@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Nav extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Nav extends React.Component {
           </a>
           <button
             className="navbar-toggler"
+            onClick={this.toggler}
             type="button"
             data-toggle="collapse"
             data-target="#navbarNav"
@@ -25,9 +27,19 @@ class Nav extends React.Component {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <a className="nav-link" href="/#">
-                  Home <span className="sr-only">(current)</span>
-                </a>
+                <Link className="nav-link" to="/">
+                  Login <span className="sr-only"></span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/home">
+                  Home <span className="sr-only"></span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/shopping">
+                  Customer <span className="sr-only"></span>
+                </Link>
               </li>
             </ul>
           </div>
