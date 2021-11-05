@@ -35,6 +35,19 @@ class Navbar extends React.Component {
                   Contact
                 </Link>
               </li>
+              <li className="navbar-item m-2 cart">
+                <Link to="/addcart">
+                  <button
+                    type="button"
+                    className="btn btn-primary position-relative"
+                  >
+                    Cart
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {this.props.cart.length}
+                    </span>
+                  </button>
+                </Link>
+              </li>
             </ul>
           </div>
         </nav>

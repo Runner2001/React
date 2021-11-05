@@ -1,7 +1,25 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   render() {
+    const hero = this.props.products.slice(0, 3).map((item, i) => {
+      return (
+        <div key={i} className="product m-2 border-bottom">
+          <span className="fs-6 text-secondary fw-light">Best Seller</span>
+          <h2>{item.Name}</h2>
+          <h5 className="text-info">The Best Phone Of the Year</h5>
+          <p className="text-secondary">{item.Brief}</p>
+          <button className="btn btn-primary mb-3">Buy</button>
+          <button className="btn btn-outline-info ms-2 mb-3">
+            <Link className="link text-black" to={`/seemore/${item.id}`}>
+              See More
+            </Link>
+          </button>
+          <span className="ms-4 text-primary">999$</span>
+        </div>
+      );
+    });
     return (
       <div className="container mt-5">
         <div className="Herosection border-bottom">
@@ -13,42 +31,7 @@ class Home extends React.Component {
           </p>
           <button className="btn mb-3 btn-outline-info">Start</button>
         </div>
-        <div className="product m-2 border-bottom">
-          <span className="fs-6 text-secondary fw-light">Best Seller</span>
-          <h2>iPhone 13 Pro</h2>
-          <h5 className="text-info">The Best Phone Of the Year</h5>
-          <p className="text-secondary">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Praesentium, quos!
-          </p>
-          <button className="btn btn-primary mb-3">Buy</button>
-          <button className="btn btn-outline-info ms-2 mb-3">See More</button>
-          <span className="ms-4 text-primary">999$</span>
-        </div>
-        <div className="product m-2 border-bottom">
-          <span className="fs-6 text-secondary fw-light">Best Seller</span>
-          <h2>Samsung S20+</h2>
-          <h5 className="text-info">The Best Camera Of the Year</h5>
-          <p className="text-secondary">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Praesentium, quos!
-          </p>
-          <button className="btn btn-primary mb-3">Buy</button>
-          <button className="btn btn-outline-info ms-2 mb-3">See More</button>
-          <span className="ms-4 text-primary">999$</span>
-        </div>
-        <div className="product m-2 border-bottom">
-          <span className="fs-6 text-secondary fw-light">Best Seller</span>
-          <h2>Huawei Mate 20</h2>
-          <h5 className="text-info">The Best Phone Of the Year</h5>
-          <p className="text-secondary">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Praesentium, quos!
-          </p>
-          <button className="btn btn-primary mb-3">Buy</button>
-          <button className="btn btn-outline-info ms-2 mb-3">See More</button>
-          <span className="ms-4 text-primary">999$</span>
-        </div>
+        {hero}
       </div>
     );
   }

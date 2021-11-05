@@ -9,6 +9,8 @@ import { Leader } from "../share.js/leader";
 import { Promotion } from "../share.js/promotion";
 import Home from "./Home";
 import { Switch, Route } from "react-router-dom";
+import Selected from "./selected";
+import About from "./About";
 
 class Main extends React.Component {
   constructor(props) {
@@ -21,11 +23,17 @@ class Main extends React.Component {
     };
   }
   render() {
+    const DishWithId = ({ match }) => {
+      return (
+        <Selected selectedDish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+          comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
+      );
+    };
     return (
       <div className="container-fluid">
         <Header />
         <Switch>
-          <Route path="/home" exact component={() => <Home
+          <Route path="/" exact component={() => <Home
             dish={this.state.dishes.filter((dish) => dish.featured)[0]}
             promotion={this.state.promotion.filter((promo) => promo.featured)[0]}
             leader={this.state.leader.filter((leader) => leader.featured)[0]}
@@ -36,7 +44,11 @@ class Main extends React.Component {
             exact
             component={() => <Menu dishes={this.state.dishes} />}
           />
+          <Route path='/menu/:dishId' component={DishWithId} />
           <Route path="/contact" component={() => <Contact />} />
+          <Route path='/about'>
+            <About leaders={this.state.leader} />
+          </Route>
         </Switch>
         <Footer />
       </div>

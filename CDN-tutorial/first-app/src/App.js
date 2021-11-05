@@ -8,20 +8,20 @@ import Contact from './Pages/Contact'
 import 'bootstrap/dist/css/bootstrap.css'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { products } from './Product'
+import AddCart from './Pages/AddCart';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      products: products,
-      seemore: [{}]
-    }
+  state = {
+    products: products,
+    cart: [],
   }
 
   render() {
     return (
       <BrowserRouter>
-        <Navbar />
+        <Navbar
+          cart={this.state.cart}
+        />
         <Switch>
           <Route path='/' component={Home} exact>
             <Home products={this.state.products} />
@@ -29,7 +29,18 @@ class App extends React.Component {
           <Route path='/product' >
             <Product
               products={this.state.products}
-              seemore={this.state.seemore}
+              addCart={this.addCart}
+            />
+          </Route>
+          <Route path="/seemore/:id">
+            <SeeMore
+              products={this.state.products}
+            />
+          </Route>
+          <Route path='/addcart'>
+            <AddCart
+              delete={this.delete}
+              cart={this.state.cart}
             />
           </Route>
           <Route path='/contact' >
@@ -40,6 +51,22 @@ class App extends React.Component {
 
     );
   }
+  addCart = (cart) => {
+    console.log(cart);
+    let carts = [...this.state.cart];
+    let i = carts.length
+    carts[i] = cart;
+    console.log(carts)
+    return this.setState({ cart: carts });
+  }
+  delete = (index) => {
+    console.log(index);
+    let carts = this.state.cart;
+    const cart = carts.filter((item, i) => {
+      return i !== index;
+    });
+    return this.setState({ cart: cart });
+  };
 }
 
 export default App;

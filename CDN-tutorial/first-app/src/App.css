@@ -5,3 +5,10 @@
 .seemore {
   text-decoration: none;
 }
+.link:hover {
+  color: white;
+}
+.cart {
+  position: absolute;
+  right: 2rem;
+}
