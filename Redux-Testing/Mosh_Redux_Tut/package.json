@@ -1,0 +1,16 @@
+{
+  "name": "mosh_redux_tut",
+  "version": "1.0.0",
+  "description": "",
+  "main": "actionCreator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axois": "0.0.1-security",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0"
+  }
+}
